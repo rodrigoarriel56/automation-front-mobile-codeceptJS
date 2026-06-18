@@ -1,0 +1,6 @@
+@charset "UTF-8";
+.side-nav__brand {
+    background: url('new-logo.png') no-repeat left center !important;
+    padding-left: 180px !important;
+    margin-left: 10px;
+  }

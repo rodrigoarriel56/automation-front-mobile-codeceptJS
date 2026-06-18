@@ -1,20 +1,23 @@
+const { SSL_OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG } = require("constants");
+
 exports.config = {
-  output: './output',
+  output: './allure-report/report',
   helpers: {
     Appium: {
-      app: 'Arriel/Users/60003339/WorkspaceArriel/projetos/AutomationMobileJS/app/Android/app-qa-release0.66.0.apk',
+      app: '/Users/60003350/WorkSpaceMidway/Projetos/AutomationMobileJS/app/Android/app-qa-release0.68.0.apk',
       platform: 'Android',
       host: 'localhost',
       port: 4723,
       desiredCapabilities: {
         automationName: 'uiautomator2',
-        deviceName: 'emulador-5554',
+        deviceName: 'emulator-5554',
         platformVersion: '8'
       }
     }
   },
   include: {
-    I: './steps_file.js'
+    I: './steps_file.js',
+    PageExtrato: './page_definitions/PageExtrato.js' 
   },
   mocha: {},
   bootstrap: null,
@@ -22,17 +25,39 @@ exports.config = {
   hooks: [],
   gherkin: {
     features: './features/*.feature',
-    steps: ['./step_definitions/steps.js']
+    steps: ['./step_definitions/LoginSteps.js',
+           './step_definitions/SaldoSteps.js',
+           './step_definitions/ExtratoSteps.js',
+           './step_definitions/DepositoPorBoletoSteps.js',
+           './step_definitions/TransferenciaMidwaySteps.js',
+           './step_definitions/TransferenciaOutrosBancosSteps.js',
+           './step_definitions/EncerramentoContaPagSteps.js'
+           ] 
+            
   },
-  plugins: {
+  plugins: { 
     "allure":
      {
+    disableWebdriverStepsReporting: true,
+    disableWebdriverScreenshotsReporting: true,
+    enabled: true,
     fullPageScreenshots: true,
-    screenshotsForAllureReport: false,  
+    screenshotsForAllureReport: true,
+    addAttachment: true,  
     },
     screenshotOnFail: {
       enabled: true
-    }
+    },
+    addAttachment: {
+      name: SSL_OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG,
+      content: true,
+    },
+    addEnvironment: {
+      name: true,
+      value: true,
+
+    },
+    
   },
   tests: './*_test.js',
   name: 'automationMobileJS',
